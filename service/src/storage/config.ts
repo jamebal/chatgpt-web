@@ -2,7 +2,17 @@ import { ObjectId } from 'mongodb'
 import * as dotenv from 'dotenv'
 import type { TextAuditServiceProvider } from 'src/utils/textAudit'
 import { isNotEmptyString, isTextAuditServiceProvider } from '../utils/is'
-import { AdvancedConfig, AnnounceConfig, AuditConfig, Config, KeyConfig, MailConfig, SiteConfig, TextAudioType, UserRole } from './model'
+import {
+  AdvancedConfig,
+  AnnounceConfig,
+  AuditConfig,
+  Config,
+  KeyConfig,
+  MailConfig,
+  SiteConfig,
+  TextAudioType,
+  UserRole,
+} from './model'
 import { getConfig, getKeys, upsertKey } from './mongo'
 
 dotenv.config()
@@ -15,9 +25,7 @@ export async function getCacheConfig(): Promise<Config> {
   if (cachedConfig && cacheExpiration > now)
     return Promise.resolve(cachedConfig)
 
-  const loadedConfig = await getOriginConfig()
-
-  cachedConfig = loadedConfig
+  cachedConfig = await getOriginConfig()
   cacheExpiration = now + 10 * 60 * 1000
 
   return Promise.resolve(cachedConfig)
@@ -150,9 +158,7 @@ export async function getCacheApiKeys(): Promise<KeyConfig[]> {
   if (apiKeysCachedConfig && apiKeysCacheExpiration > now)
     return Promise.resolve(apiKeysCachedConfig)
 
-  const loadedConfig = (await getApiKeys()).keys
-
-  apiKeysCachedConfig = loadedConfig
+  apiKeysCachedConfig = (await getApiKeys()).keys
   apiKeysCacheExpiration = now + 10 * 60 * 1000
 
   return Promise.resolve(apiKeysCachedConfig)
