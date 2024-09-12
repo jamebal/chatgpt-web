@@ -35,13 +35,13 @@ export function defaultSetting(): UserState {
       name: '',
       description: '',
       root: false,
-      config: { chatModel: 'gpt-3.5-turbo' },
+      config: { chatModel: 'gpt-4-mini' },
       roles: [],
       advanced: {
-        systemMessage: 'You are ChatGPT, a large language model trained by OpenAI. Follow the user\'s instructions carefully. Respond using markdown.',
+        systemMessage: '你是ChatGPT, 请使用精简且专业的中文语言来回答用户的问题, 并且使用 Markdown 语法优化答案的格式',
         temperature: 0.8,
         top_p: 1,
-        maxContextCount: 20,
+        maxContextCount: 16,
       },
       useAmount: 1, // chat usage amount
     },
@@ -57,10 +57,10 @@ export function getLocalState(): UserState {
     }
     if (!localSetting.userInfo.advanced) {
       localSetting.userInfo.advanced = {
-        systemMessage: 'You are ChatGPT, a large language model trained by OpenAI. Follow the user\'s instructions carefully. Respond using markdown.',
-        temperature: 0.8,
+        systemMessage: '你是ChatGPT, 请使用精简且专业的中文语言来回答用户的问题, 并且使用 Markdown 语法优化答案的格式',
+        temperature: 0.9,
         top_p: 1,
-        maxContextCount: 20,
+        maxContextCount: 15,
       }
     }
   }

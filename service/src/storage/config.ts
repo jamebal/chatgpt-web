@@ -105,7 +105,7 @@ export async function getOriginConfig() {
       'You are ChatGPT, a large language model trained by OpenAI. Follow the user\'s instructions carefully.Respond using markdown (latex start with $).',
       0.8,
       1,
-      20,
+      17,
     )
   }
 
