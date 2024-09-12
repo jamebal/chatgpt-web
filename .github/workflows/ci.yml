@@ -3,11 +3,11 @@ name: CI
 on:
   push:
     branches:
-      - main
+      - jmal
 
   pull_request:
     branches:
-      - main
+      - jmal
 
 jobs:
   lint:
