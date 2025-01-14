@@ -84,10 +84,25 @@ export async function initApi(key: KeyConfig, chatModel: string, maxContextCount
       options.maxModelTokens = 16385
       options.maxResponseTokens = 4096
     }
+    else if (model.toLowerCase().includes('deepseek-chat')) {
+      // 'deepseek-chat'
+      options.maxModelTokens = 65536
+      options.maxResponseTokens = 8192
+    }
+    else if (model.toLowerCase().includes('claude')) {
+      // 'claude'
+      options.maxModelTokens = 65536
+      options.maxResponseTokens = 8192
+    }
+    else if (model.toLowerCase().includes('gemini')) {
+      // 'gemini'
+      options.maxModelTokens = 32767
+      options.maxResponseTokens = 8192
+    }
     // If none of the above, use the default values
     else {
-      options.maxModelTokens = 4096
-      options.maxResponseTokens = 1024
+      options.maxModelTokens = 16385
+      options.maxResponseTokens = 4096
     }
 
     if (isNotEmptyString(OPENAI_API_BASE_URL))
