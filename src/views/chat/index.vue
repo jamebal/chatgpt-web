@@ -67,6 +67,7 @@ let prevScrollTop: number
 const promptStore = usePromptStore()
 
 // 使用storeToRefs，保证store修改后，联想部分能够重新渲染
+// @ts-expect-error TS2339: Property 'promptList' does not exist on type 'StoreToRefs<any>'.
 const { promptList: promptTemplate } = storeToRefs<any>(promptStore)
 
 // 未知原因刷新页面，loading 状态不会重置，手动重置
@@ -680,7 +681,7 @@ onUnmounted(() => {
               <div>
                 <Message
                   v-for="(item, index) of dataSources"
-                  :key="index"
+                  :key="String(item.uuid) + String(item.inversion)"
                   :index="index"
                   :current-nav-index="currentNavIndexRef"
                   :date-time="item.dateTime"
@@ -734,6 +735,7 @@ onUnmounted(() => {
                 style="flex-flow:row nowrap;min-width:2.5em;padding:.5em;border-radius:.5em;"
                 :headers="uploadHeaders"
                 :show-file-list="false"
+                :multiple="true"
                 response-type="json"
                 accept="image/png, image/jpeg, image/webp, image/gif"
                 @finish="handleFinish"
